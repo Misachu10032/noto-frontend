@@ -16,6 +16,9 @@ export default function NoteViewerPanel() {
   const [followUp, setFollowUp] = useState("");
   const [isAsking, setIsAsking] = useState(false);
 
+  useEffect(() => {
+    console.log("isEditorVisible changed:", isEditorVisible);
+  }, [isEditorVisible]);
   // Find the temp note for the selected note
   const tempNote = useMemo(
     () => tempNotes.find((n) => n.id === selectedNote?.id) || null,
@@ -73,9 +76,6 @@ export default function NoteViewerPanel() {
     }
   };
 
-  useEffect(() => {
-    console.log("isEditorVisible changed:", isEditorVisible);
-  }, [isEditorVisible]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

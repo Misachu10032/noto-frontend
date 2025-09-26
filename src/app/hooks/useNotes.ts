@@ -35,7 +35,7 @@ export function useNotes() {
   // Fetch notes
   // -----------------------------
   const hasFetchedRef = useRef(false);
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchNotes = useCallback(
     async (force = false) => {
       if (!userId) return;
