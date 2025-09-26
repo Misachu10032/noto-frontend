@@ -25,7 +25,7 @@ export function useNotes() {
   const { data: session } = useSession();
   const userId = session?.user?.userId;
 
-  const { notes, selectedNote, isLoading, isEditorVisible, tempNotes, allTags } =
+  const { notes, selectedNote, isLoading, isEditorVisible, tempNotes } =
     useAppSelector((state) => state.notes);
 
   const tempNote =
