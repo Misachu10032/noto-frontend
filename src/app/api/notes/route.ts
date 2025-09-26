@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
-    // @ts-ignore
+    //  "@ts-expect-error" 
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.userId) {
@@ -30,7 +30,7 @@ export async function GET() {
 export async function POST(req: Request) {
   const API_BASE =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
-    // @ts-ignore
+    //  "@ts-expect-error" 
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.userId) {

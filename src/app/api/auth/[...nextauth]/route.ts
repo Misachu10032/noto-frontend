@@ -10,7 +10,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    // @ts-ignore
+    //  "@ts-expect-error" 
     async signIn({ user }) {
       try {
         const API_BASE =
@@ -32,12 +32,12 @@ export const authOptions = {
 
       return true;
     },
-// @ts-ignore
+//  "@ts-expect-error" 
     async jwt({ token, user }) {
       if (user?.userId) token.userId = user.userId;
       return token;
     },
-// @ts-ignore
+//  "@ts-expect-error" 
     async session({ session, token }) {
       if (token?.userId) session.user.userId = token.userId;
       return session;
@@ -46,6 +46,6 @@ export const authOptions = {
 
   session: { strategy: "jwt" },
 };
-// @ts-ignore
+//  "@ts-expect-error" 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
