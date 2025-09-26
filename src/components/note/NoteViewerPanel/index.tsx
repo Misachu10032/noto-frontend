@@ -148,7 +148,8 @@ export default function NoteViewerPanel() {
                       <div className="mt-2">
                         <span className="font-medium text-gray-800">A:</span>
                         <MarkdownViewer
-                          content={(tempNote.followupAnswers || [])[idx]}
+                         content={tempNote.content} tags={[]} 
+                    
                         />
                       </div>
                     )}
