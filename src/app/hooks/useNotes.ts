@@ -25,7 +25,7 @@ export function useNotes() {
   const { data: session } = useSession();
   const userId = session?.user?.userId;
 
-  const { notes, selectedNote, isLoading, isEditorVisible, tempNotes,allTags } =
+  const { notes, selectedNote, isLoading, isEditorVisible, tempNotes, allTags } =
     useAppSelector((state) => state.notes);
 
   const tempNote =
@@ -35,7 +35,7 @@ export function useNotes() {
   // Fetch notes
   // -----------------------------
   const hasFetchedRef = useRef(false);
-// eslint-disable-next-line react-hooks/exhaustive-deps
+
   const fetchNotes = useCallback(
     async (force = false) => {
       if (!userId) return;
@@ -56,12 +56,12 @@ export function useNotes() {
         dispatch(setError(errorMessage));
         console.error(err);
       } finally {
-              console.log(allTags,"sadd")
+
         dispatch(setLoading(false));
-   
+
       }
     },
-    [userId, dispatch]
+    [userId, dispatch, notes.length]
   );
   // -----------------------------
   // Generate temporary note
