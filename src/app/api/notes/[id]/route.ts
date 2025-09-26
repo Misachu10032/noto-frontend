@@ -9,6 +9,8 @@ interface Params {
 export async function PUT(req: Request, { params }: Params) {
   try {
     // Check session
+    const API_BASE =
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
     const session = await getServerSession(authOptions);
     if (!session?.user?.userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

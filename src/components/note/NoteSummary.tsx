@@ -28,8 +28,10 @@ export default function NoteSummary() {
     e.stopPropagation();
     if (confirm("Are you sure you want to delete this note?")) {
       try {
+        const API_BASE =
+          process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
         const response = await fetch(
-          `http://localhost:5000/api/notes/${noteId}`,
+          `${API_BASE}/notes/${noteId}`,
           {
             method: "DELETE",
           }
@@ -57,13 +59,12 @@ export default function NoteSummary() {
             <li
               key={note.id}
               onClick={() => dispatch(setSelectedNote(note))}
-              className={`p-2 rounded-md cursor-pointer flex justify-between items-center ${
-                selectedNote?.id === note.id
+              className={`p-2 rounded-md cursor-pointer flex justify-between items-center ${selectedNote?.id === note.id
                   ? "bg-blue-50 border border-blue-200"
                   : note.saved
-                  ? "bg-gray-50 border border-gray-200"
-                  : "bg-yellow-50 border border-yellow-200"
-              }`}
+                    ? "bg-gray-50 border border-gray-200"
+                    : "bg-yellow-50 border border-yellow-200"
+                }`}
             >
               <span className="truncate">{note.keyword}</span>
               <button

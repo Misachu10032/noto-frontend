@@ -32,8 +32,10 @@ export default function NoteViewerPanel() {
     setIsAsking(true);
 
     try {
+      const API_BASE =
+        process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
       // Call your backend API
-      const res = await fetch("http://localhost:5000/api/ask-followup", {
+      const res = await fetch(`${API_BASE}/ask-followup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -90,12 +92,12 @@ export default function NoteViewerPanel() {
             >
               Edit
             </button>
-      
+
           </div>
         </div>
 
         <div className="flex-1 min-h-0 overflow-auto">
-          <MarkdownViewer content={tempNote.content} tags={tempNote.tags}/>
+          <MarkdownViewer content={tempNote.content} tags={tempNote.tags} />
         </div>
 
         {/* Follow-up Q&A section */}
@@ -112,11 +114,10 @@ export default function NoteViewerPanel() {
               disabled={isAsking}
             />
             <button
-              className={`px-4 py-2 rounded text-white transition-colors ${
-                isAsking || !followUp.trim()
-                  ? "bg-blue-300 cursor-not-allowed"
-                  : "bg-blue-500 hover:bg-blue-600"
-              }`}
+              className={`px-4 py-2 rounded text-white transition-colors ${isAsking || !followUp.trim()
+                ? "bg-blue-300 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+                }`}
               onClick={handleAskFollowUp}
               disabled={!followUp.trim() || isAsking}
             >

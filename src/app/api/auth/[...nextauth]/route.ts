@@ -12,7 +12,9 @@ export const authOptions = {
   callbacks: {
     async signIn({ user }) {
       try {
-        const res = await fetch("http://localhost:5000/api/users", {
+        const API_BASE =
+          process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
+        const res = await fetch(`${API_BASE}/users`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: user.email, name: user.name }),
