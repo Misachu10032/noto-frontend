@@ -73,7 +73,6 @@ export default function NoteViewerPanel() {
     }
   };
 
-
   useEffect(() => {
     console.log("isEditorVisible changed:", isEditorVisible);
   }, [isEditorVisible]);

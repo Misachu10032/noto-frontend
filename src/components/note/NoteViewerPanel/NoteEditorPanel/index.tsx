@@ -3,11 +3,7 @@ import NoteEditor from "./NoteEditor";
 import { TempNote } from "../../../../app/store/slices/notesSlice";
 
 export default function NoteEditorPanel(tempNote: TempNote) {
-  const {
-    setEditorVisible,
-    updateTempNoteContent,
-    handleSaveNote,
-  } = useNotes();
+  const { setEditorVisible, handleSaveNote } = useNotes();
 
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col">

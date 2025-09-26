@@ -20,7 +20,7 @@ export async function PUT(req: Request, { params }: Params) {
     const body = await req.json();
 
     // Forward request to backend
-    const res = await fetch(`http://localhost:5000/api/notes/${params.id}`, {
+    const res = await fetch(`${API_BASE}/notes/${params.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...body, userId }),

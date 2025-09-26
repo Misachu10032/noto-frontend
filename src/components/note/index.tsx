@@ -11,9 +11,7 @@ import TagFilter from "./TagFilter";
 
 export default function NoteLayout() {
   const { data: session } = useSession();
-  const { fetchNotes, setEditorVisible, selectedNote, handleNoteGenerated } =
-    useNotes();
-
+  const { fetchNotes, selectedNote, handleNoteGenerated } = useNotes();
 
   useEffect(() => {
     if (session?.user?.userId) {
@@ -29,7 +27,7 @@ export default function NoteLayout() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 space-y-4">
           <NoteForm onNoteGenerated={handleNoteGenerated} />
-          <TagFilter/>
+          <TagFilter />
           <NoteSummary />
         </div>
 
