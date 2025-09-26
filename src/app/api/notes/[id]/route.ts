@@ -2,16 +2,16 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-interface Params {
-  params: { id: string };
-}
-
-export async function PUT(req: Request, { params }: Params) {
+export async function PUT(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> } // params is a Promise
+) {
   try {
-    // Check session
+    const { id } = await params; // ✅ await before using id
+
     const API_BASE =
       process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
-      //  "@ts-expect-error" 
+
     const session = await getServerSession(authOptions);
     if (!session?.user?.userId) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
@@ -21,7 +21,7 @@ export async function PUT(req: Request, { params }: Params) {
     const body = await req.json();
 
     // Forward request to backend
-    const res = await fetch(`${API_BASE}/notes/${params.id}`, {
+    const res = await fetch(`${API_BASE}/notes/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...body, userId }),
@@ -31,9 +31,6 @@ export async function PUT(req: Request, { params }: Params) {
     return NextResponse.json(note, { status: res.status });
   } catch (err) {
     console.error("PUT /api/notes/[id] error:", err);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
