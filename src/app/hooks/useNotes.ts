@@ -18,6 +18,7 @@ import {
   TempNote,
   addTempNote,
   syncNoteAfterSave,
+  Note,
 } from "../store/slices/notesSlice";
 
 export function useNotes() {
@@ -149,10 +150,10 @@ export function useNotes() {
     fetchNotes,
     handleNoteGenerated,
     handleSaveNote,
-    setTempNotes: (notes: TempNote[] | any) => dispatch(setTempNotes(notes)),
-    setSelectedNote: (note: any) => dispatch(setSelectedNote(note)),
+    setTempNotes: (notes: TempNote[]) => dispatch(setTempNotes(notes)),
+    setSelectedNote: (note: Note) => dispatch(setSelectedNote(note)),
     setEditorVisible: (visible: boolean) => dispatch(setEditorVisible(visible)),
-    updateTempNoteContent: (payload: any) =>
+    updateTempNoteContent: (payload: { id: string | number; content: string }) =>
       dispatch(updateTempNoteContent(payload)),
     addTempNoteFollowUpQuestion: (payload: {
       id: string | number;
